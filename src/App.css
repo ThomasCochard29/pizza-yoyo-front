@@ -1,38 +1,907 @@
-.App {
-  text-align: center;
+/*? Import Font Family */
+@font-face {
+    font-family: "Yanone Kaffeesatz";
+    src: local("YanoneKaffeesatz"),
+        url("fonts/YanoneKaffeesatz-Regular.ttf") format("truetype");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+    font-family: "Smokum";
+    src: local("Smokum"),
+        url("fonts/Smokum-Regular.ttf") format("truetype");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+    font-family: "Paprika";
+    src: local("Paprika"),
+        url("fonts/Paprika-Regular.ttf") format("truetype");
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/*? Color Var */
+:root {
+    --red-color: #C00A27;
+    --green-color: #00A149;
+    --black-color: #181818;
+    --grey-color: #2C2C2C;
+    --yellow-color: #FFCD02;
 }
 
-.App-link {
-  color: #61dafb;
+/*! Customize ScrollBar */
+*::-webkit-scrollbar {
+    width: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+*::-webkit-scrollbar-track {
+    background: var(--green-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--red-color);
+    border-radius: 10px;
+    border: var(--green-color) 1px solid;
+}
+
+/*! Body */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*! Carrousel */
+.custom-carousel {
+    height: 100vh !important;
+}
+
+.control-dots .dot {
+    background-color: var(--red-color) !important;
+    opacity: 0.6 !important;
+}
+
+.control-dots .selected {
+    background-color: var(--green-color) !important;
+    opacity: 1 !important;
+}
+
+.legend {
+    position: relative !important;
+    top: -80% !important;
+    left: 20vw !important;
+    color: white !important;
+    font-size: 100px !important;
+    background: none !important;
+    opacity: 100 !important;
+    font-family: Yanone Kaffeesatz;
+    z-index: 1;
+}
+
+/* Flou Arriere Text */
+.legend::before {
+    content: '';
+    background: url('images/freelargepizza.png') -2% 27%;
+    zoom: 160%;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    -o-filter: blur(5px);
+    filter: blur(5px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30%;
+    right: 40%;
+    z-index: -1;
+}
+
+.legendBtnOL {
+    position: relative;
+    top: -52%;
+    background-color: #8CA93E;
+    color: white;
+    font-size: 70px;
+    letter-spacing: 4px;
+    width: 70%;
+    padding: 0px 60px;
+    border: none;
+    border-radius: 200px;
+    font-family: Smokum;
+    z-index: 1;
+}
+
+.legendCarte {
+    position: relative;
+    top: -96%;
+    left: 20vw;
+    letter-spacing: 4px;
+    color: var(--red-color);
+    font-size: 140px;
+    font-family: Yanone Kaffeesatz;
+}
+
+.legendBtnPC {
+    position: relative;
+    top: -60%;
+    background-color: #8CA93E;
+    color: white;
+    font-size: 70px;
+    letter-spacing: 4px;
+    width: 70%;
+    padding: 0px 60px;
+    border: none;
+    border-radius: 200px;
+    font-family: Smokum;
+}
+
+.legendVeggie {
+    position: relative;
+    top: -84%;
+    letter-spacing: 4px;
+    color: white;
+    font-size: 140px;
+    font-family: Yanone Kaffeesatz;
+    z-index: 1;
+}
+
+/* Flou Arriere Text */
+.legendVeggie::before {
+    content: '';
+    background: url('images/veggie.png') 50% 43.2%;
+    zoom: 226%;
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    -o-filter: blur(5px);
+    filter: blur(5px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 34%;
+    right: 34%;
+    z-index: -1;
+}
+
+.legendBtnVeggie {
+    position: relative;
+    top: -80%;
+    background-color: #8CA93E;
+    color: white;
+    font-size: 70px;
+    letter-spacing: 4px;
+    width: 70%;
+    padding: 0px 60px;
+    border: none;
+    border-radius: 200px;
+    font-family: Smokum;
+}
+
+/*! Promotion */
+.Promo {
+    display: flex;
+    flex: 100% 100% auto;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.promoMardi {
+    background-color: var(--green-color);
+}
+
+.promoVendredi {
+    background-color: var(--red-color);
+    z-index: 1;
+}
+
+.promoMardi,
+.promoVendredi {
+    flex: 1;
+    width: 50%;
+    text-align: center;
+    color: white;
+}
+
+.promoMardi>p,
+.promoVendredi>p {
+    font-size: 40px;
+    font-family: Paprika;
+    letter-spacing: 6px;
+    margin-top: 20px;
+}
+
+.promoMardi>h1,
+.promoVendredi>h1 {
+    text-align: start;
+    margin-left: 20%;
+    font-size: 80px;
+    font-family: Helvetica;
+}
+
+.span-promo {
+    display: block;
+    text-align: start;
+    font-size: 20px;
+    font-family: Helvetica;
+    letter-spacing: 6px;
+    margin: 6% 0% 0% 20%;
+}
+
+.span-yellow {
+    display: block;
+    text-align: start;
+    margin: 6% 0% 0% 20%;
+    color: var(--yellow-color);
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.span-asterix {
+    display: block;
+    text-align: start;
+    margin: 0% 0% 0% 20%;
+}
+
+.btn-promo {
+    display: block;
+    margin: 4% 0% 0% 20%;
+    border-radius: 200px;
+    border: none;
+    padding: 16px;
+    width: 16%;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.img-promo {
+    position: relative;
+    z-index: 1;
+}
+
+.img-promo-mardi {
+    width: 60%;
+    top: 10%;
+    left: 36%;
+}
+
+.img-promo-vendredi {
+    top: -10%;
+    left: 40%;
+}
+
+/*! Nos Pizzas */
+.h1-np {
+    text-align: center;
+    color: var(--red-color);
+    margin-top: 4%;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 64px;
+}
+
+.filter {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.btn-filter {
+    background: none;
+    border-radius: 200px;
+    border-radius: 200px;
+    padding: 10px 30px;
+}
+
+.btn-tomate {
+    border: 1px solid var(--red-color);
+}
+
+.btn-cf {
+    border: 1px solid var(--yellow-color);
+    margin: 0px 10%;
+}
+
+.btn-choco {
+    border: 1px solid var(--green-color);
+}
+
+.section-card {
+    border: none;
+    display: flex;
+    flex-flow: row wrap;
+    overflow-y: scroll;
+    height: 92vh;
+    width: 68%;
+    margin-left: 16%;
+}
+
+.card-template {
+    width: 446px;
+    height: 420px !important;
+    margin: 2% 11%;
+    box-sizing: border-box;
+    background-color: var(--green-color) !important;
+    border: 2px white solid;
+    border-radius: 20px !important;
+    box-shadow: 16px 16px 5px 0px rgba(36, 36, 36, 0.399) !important;
+}
+
+.card-content {
+    border-top: 2px white solid;
+    color: white;
+}
+
+/*! Carte Fidelité */
+.carte-fidel {
+    background-color: white;
+    margin-left: 25%;
+    width: 50%;
+    padding: 8px;
+    box-shadow: 6px 6px 5px 0px rgba(36, 36, 36, 0.399) !important;
+    border-radius: 60px;
+}
+
+
+.carte-fidel-image {
+    background-repeat: no-repeat;
+    height: 40vh;
+    border-radius: 60px;
+}
+
+/*! Map */
+.map {
+    background-color: white;
+    margin-top: 4%;
+    margin-left: 25%;
+    width: 50%;
+    padding: 8px;
+    box-shadow: 6px 6px 5px 0px rgba(36, 36, 36, 0.399) !important;
+    border-radius: 60px;
+}
+
+.map-iframe {
+    height: 40vh;
+    border-radius: 60px;
+}
+
+/*! Formulaire Contact */
+.form-contact {
+    background-color: white;
+    margin-top: 4%;
+    margin-left: 25%;
+    width: 50%;
+    padding: 8px;
+    box-shadow: 6px 6px 5px 0px rgba(36, 36, 36, 0.399) !important;
+    border-radius: 60px;
+}
+
+.form-contact-gray {
+    background: #F2F3F4;
+    border-radius: 60px;
+    text-align: center;
+    padding: 10% 0;
+}
+
+.form-contact-gray p {
+    font-size: 40px;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.form-contact-gray .user-box input {
+    width: 61%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--black-color);
+    margin: 0 3%;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 200px;
+    outline: none;
+    background: white;
+}
+
+.form-contact-gray .user-box:nth-child(4) {
+    margin: 0 1%;
+}
+
+.form-contact-gray .user-box textarea {
+    width: 62%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--black-color);
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background: white;
+    resize: none;
+}
+
+/* Btn Form + Animation */
+.form-contact-gray form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: var(--black-color);
+    background: var(--yellow-color);
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-right: 22vw;
+    letter-spacing: 3px;
+}
+
+.form-contact-gray a:hover {
+    background: var(--red-color);
+    color: white;
+}
+
+.form-contact-gray a:hover span:nth-child(1){
+    background: linear-gradient(90deg, transparent, var(--green-color));
+}
+
+.form-contact-gray a:hover span:nth-child(2){
+    background: linear-gradient(180deg, transparent, var(--green-color));
+}
+
+.form-contact-gray a:hover span:nth-child(3){
+    background: linear-gradient(270deg, transparent, var(--green-color));
+}
+
+.form-contact-gray a:hover span:nth-child(4){
+    background: linear-gradient(360deg, transparent, var(--green-color));
+}
+
+.form-contact-gray a span {
+    position: absolute;
+    display: block;
+}
+
+.form-contact-gray a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red-color));
+    animation: btn-anim1 1.5s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.form-contact-gray a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--red-color));
+    animation: btn-anim2 1.5s linear infinite;
+    animation-delay: .375s
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.form-contact-gray a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, var(--red-color));
+    animation: btn-anim3 1.5s linear infinite;
+    animation-delay: .75s
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.form-contact-gray a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, var(--red-color));
+    animation: btn-anim4 1.5s linear infinite;
+    animation-delay: 1.125s
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}
+
+/*! Footer */
+.footer {
+    margin-top: 4%;
+    background: #2C2C2C;
+    height: 60vh;
+}
+
+.footer-reseau {
+    background-color: var(--black-color);
+    padding: 2%;
+    text-align: center;
+}
+
+.footer-reseau a{
+    margin: 0px 6%;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4%;
+    color: white;
+    text-align: center;
+}
+
+.lien-utiles {
+    margin-left: 30%;
+}
+
+.lien-titre {
+    font-weight: bold;
+}
+
+.lien-utiles .lien-p:nth-child(2) {
+    margin-top: 20%;
+}
+
+.horaire {
+    margin-right: 30%;
+}
+
+.horaire-titre {
+    font-weight: bold;
+}
+
+.horaire-text {
+    color: #B0B0B0;
+}
+
+.horaire .horaire-text:nth-child(2) {
+    margin-top: 20%;
+}
+
+.horaire .horaire-text:nth-child(4) {
+    margin-top: 20%;
+}
+
+/*! La Carte */
+.header-lacarte {
+    background: var(--red-color);
+    height: 20vh;
+    border-top: 7px solid;
+    border-image: linear-gradient(to right, transparent 0%, white 50%, transparent 100%) 1;
+    margin-top: 7%;
+}
+
+.search-lacarte {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.search {
+    width: 80%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--black-color);
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 200px;
+    outline: none;
+    background: white;
+}
+
+.choix {
+    display: flex;
+    justify-content: center;
+}
+
+.choix-item {
+    margin: 1% 3%;
+    display: flex;
+    color: white;
+}
+
+.logo-item {
+    margin: 0 20px;
+    position: relative;
+    top: -10px;
+    width: 100%;
+    height: 4vh;
+}
+
+@media (max-width: 425px) {
+    /*! Carousel */
+    .custom-carousel {
+        height: 400px !important;
+    }
+    
+    .legend {
+        top: -80% !important;
+        left: 20vw !important;
+        font-size: 40px !important;
+    }
+    
+    /* Flou Arriere Text */
+    .legend::before {
+        background: none;
+    }
+    
+    .legendBtnOL {
+        top: -66%;
+        font-size: 40px;
+        letter-spacing: 2px;
+        width: 80%;
+    }
+    
+    .legendCarte {
+        top: -90%;
+        left: 20vw;
+        font-size: 40px;
+    }
+    
+    .legendBtnPC {
+        top: -66%;
+        font-size: 30px;
+        letter-spacing: 2px;
+        width: 80%;
+    }
+    
+    .legendVeggie {
+        top: -66%;
+        letter-spacing: 4px;
+        font-size: 60px;
+    }
+    
+    /* Flou Arriere Text */
+    .legendVeggie::before {
+        background: none;
+    }
+    
+    .legendBtnVeggie {
+        top: -66%;
+        font-size: 30px;
+        width: 80%;
+        letter-spacing: 2px;
+    }
+
+    /*! Promotion */
+    .Promo {
+        display: flex;
+        flex: 100% 100% auto;
+        height: 66vh;
+        overflow: hidden;
+    }
+
+    .promoMardi>p,
+    .promoVendredi>p {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+
+    .promoMardi>h1,
+    .promoVendredi>h1 {
+        font-size: 30px;
+    }
+
+    .span-promo {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin: 20% 0% 0% 20%;
+    }
+
+    .span-yellow {
+        font-size: 30px;
+    }
+
+    .btn-promo {
+        width: 60%;
+        margin-top: 10%;
+    }
+
+    .img-promo-mardi {
+        width: 160%;
+        top: 10%;
+        left: 20%;
+    }
+
+    .img-promo-vendredi {
+        width: 100%;
+        left: 50%;
+    }
+
+    /*! Nos Pizzas */
+    .h1-np {
+        font-size: 50px;
+    }
+
+    .filter {
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .btn-tomate {
+        border: 1px solid var(--red-color);
+        padding: 10px 58px;
+    }
+
+    .btn-cf {
+        border: 1px solid var(--yellow-color);
+        margin: 10px 10%;
+    }
+
+    .btn-choco {
+        border: 1px solid var(--green-color);
+        padding: 10px 48px;
+    }
+
+    .card-template {
+        height: 440px !important;
+        margin: 4% 2%;
+        box-shadow: 8px 8px 5px 0px rgba(36, 36, 36, 0.399) !important;
+    }
+
+    /*! Carte Fidelité */
+    .carte-fidel {
+        margin-left: 20%;
+        margin-top: 4%;
+        width: 60%;
+        border-radius: 20px;
+    }
+
+    .carte-fidel-image {
+        height: 40vh;
+        border-radius: 60px;
+        zoom: 26%;
+    }
+
+    /*! Map */
+    .map {
+        margin-left: 20%;
+        width: 60%;
+    }
+
+    .map-iframe {
+        height: 40vh;
+    }
+
+    /*! Formulaire Contact */
+    .form-contact {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    .form-contact-gray p {
+        font-size: 20px;
+    }
+
+    .form-contact-gray .user-box input {
+        width: 80%;
+        font-size: 12px;
+    }
+
+    .form-contact-gray .user-box textarea {
+        width: 80%;
+        font-size: 12px;
+    }
+
+    /* Btn Form + Animation */
+    .form-contact-gray form a {
+        font-size: 12px;
+        margin-right: 0vw;
+    }
+
+    .form-contact-gray a:hover {
+        background: var(--red-color);
+        color: white;
+    }
+
+    /*! Footer */
+    .footer {
+        height: 70vh;
+    }
+
+    .footer-reseau a{
+        margin: 0px 4%;
+    }
+
+    .footer-reseau a img{
+        zoom: 80%;
+        margin-right: 2%;
+    }
+
+    .footer-info {
+        display: block;
+        margin-top: 10%;
+    }
+
+    .lien-utiles {
+        margin-left: 6%;
+    }
+
+    .lien-p {
+        font-size: 12px;
+    }
+
+    .lien-utiles .lien-p:nth-child(2) {
+        margin-top: 4%;
+    }
+
+    .horaire {
+        margin-top: 10%;
+        margin-right: -5%;
+    }
+
+    .horaire-titre {
+        font-weight: bold;
+    }
+
+    .horaire-text {
+        color: #B0B0B0;
+        font-size: 12px;
+    }
+
+    .horaire-span {
+        font-size: 12px;
+    }
+
+    .horaire .horaire-text:nth-child(2) {
+        margin-top: 6%;
+    }
+
+    .horaire .horaire-text:nth-child(4) {
+        margin-top: 6%;
+    }
+
+    /*! La Carte */
+    .header-lacarte {
+        height: 30vh;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+    .choix {
+        flex-wrap: wrap;
+    }
+
+    .choix-item {
+        margin: 1.5% 3%;
+    }
 }

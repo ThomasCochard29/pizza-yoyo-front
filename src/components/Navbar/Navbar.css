@@ -1,0 +1,153 @@
+/*! ----------------- Color Var ----------------- */
+:root {
+  --red-color: #C00A27;
+  --green-color: #00A149;
+  --black-color: #181818;
+  --grey-color: #2C2C2C;
+}
+
+/*! ----------------- MENU ----------------- */
+
+.nav-link {
+  color: white;
+}
+
+.nav-item {
+  color: white;
+  border-radius: 100px;
+  padding: 10px;
+}
+
+.nav-item:hover {
+  color: var(--green-color);
+}
+
+.nav-item-div:hover {
+  color: var(--green-color);
+}
+
+nav {
+  display: flex;
+  height: 14vh;
+  background: var(--red-color);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.logo {
+  position: relative;
+  right: 400%;
+  width: 100px;
+  height: 100px;
+  margin: 5px 10px;
+}
+
+.logo-out {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 6%;
+  top: 10%;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+nav .menu-btn i {
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.search-icon {
+  position: relative;
+  left: 28%;
+}
+
+@media (max-width: 425px) {
+  nav {
+    justify-content: space-between;
+  }
+
+  .logo {
+    position: relative;
+    right: auto;
+  }
+
+  .logo-out {
+    position: relative;
+    right: auto;
+  }
+
+  .search-icon {
+    display: none;
+  }
+
+  nav .menu-btn i {
+    display: block;
+    position: relative;
+    right: 4vw;
+  }
+
+  nav ul {
+    position: fixed;
+    top: 27vw;
+    right: -100%;
+    background: var(--green-color);
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    transition: all 0.3s ease;
+    padding: 0%;
+  }
+
+  #click:checked~ul {
+    right: 0;
+  }
+
+  nav ul li {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10vw;
+  }
+
+  nav ul li a {
+    width: 100%;
+    font-size: 20px;
+    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  #click:checked~ul li a {
+    margin-left: 0px;
+  }
+
+  nav ul li a.active,
+  nav ul li a:hover {
+    background: none;
+    color: var(--red-color) !important;
+    transition: color 0.5s;
+  }
+}
+/* fin menu */
