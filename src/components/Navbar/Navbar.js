@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext.js";
+import axios from "axios";
 
 // CSS
 import "./Navbar.css";
@@ -13,6 +15,9 @@ import Logo from '../../images/logo/Logo.png';
 // Icone
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { HiSearchCircle } from 'react-icons/hi';
+import { SiCodechef } from 'react-icons/si';
+import { TbCircleKeyFilled } from 'react-icons/tb';
+import { AiFillShopping } from 'react-icons/ai';
 
 
 function Navbar() {
@@ -95,6 +100,23 @@ function Navbar() {
     window.addEventListener("scroll", changeBackground);
   });
 
+  const { currentUser } = useContext(AuthContext);
+
+  const [err, setErr] = useState(null);
+  const navigate = useNavigate();
+
+  const handleLogout = async e => {
+    e.preventDefault()
+
+    try{
+      await axios.post("http://localhost:8800/api/auth/logout");
+      navigate("/")
+      window.location.reload(false);
+    } catch (err) {
+      setErr(err.response.data);
+    }
+  }
+
   return(
     <nav className={
       navbar
@@ -123,7 +145,40 @@ function Navbar() {
         <li className="nav-item d-flex">{mesLiens}</li>
       </ul>
 
-      <HiSearchCircle size="40px" color="white" className="search-icon"/>
+      {currentUser && (
+        <AiFillShopping
+          size="40px"
+          color="white"
+          className="nav-item-div"
+          style={{marginTop: "-1vw"}}
+        />
+      )}
+
+      {currentUser && currentUser.admin && (
+        <TbCircleKeyFilled 
+          size="40px" 
+          style={{marginRight: "20px"}} 
+          color="white"
+          className="search-icon"
+        />
+      )}
+
+      <Link to="/login">
+        <SiCodechef 
+          size="40px"
+          style={{marginRight: "20px"}} 
+          color="white" 
+          className="search-icon" 
+          title={!currentUser ? "Connection" : "Déconnection"}
+          onClick={!currentUser ? null : handleLogout}
+        />
+      </Link>
+
+      <HiSearchCircle 
+        size="40px" 
+        color="white" 
+        className="search-icon"
+      />
     </nav>
   ) 
 }

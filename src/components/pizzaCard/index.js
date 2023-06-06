@@ -37,7 +37,7 @@ const PizzaCard = () => {
     // Parcour du fichier de la data pour les pizzas et creation de la card pour l'affichage des pizzas
     const pizza = filterPizza().map((pizza , i) => {
         return(
-            <Card sx={{ minWidth: 200 }} key={i} className="card-template">
+            <Card sx={{ minWidth: 200, maxWidth: 340, minHeight: 440 }} key={i} className="card-template">
                 <CardActionArea>
                     <CardMedia
                         component="img"
