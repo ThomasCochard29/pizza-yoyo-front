@@ -38,7 +38,7 @@ nav {
 
 .logo {
   position: relative;
-  right: 400%;
+  right: 22vw;
   width: 100px;
   height: 100px;
   margin: 5px 10px;
@@ -82,7 +82,7 @@ input[type="checkbox"] {
 
 .search-icon {
   position: relative;
-  left: 28%;
+  left: 22vw;
 }
 
 @media (max-width: 425px) {
