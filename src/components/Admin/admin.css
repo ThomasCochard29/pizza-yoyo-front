@@ -1,0 +1,81 @@
+/*? Color Var */
+:root {
+    --red-color: #C00A27;
+    --green-color: #00A149;
+    --black-color: #181818;
+    --grey-color: #2C2C2C;
+    --yellow-color: #FFCD02;
+}
+
+/*! DataGrid */
+.header-datagrid {
+    background: var(--green-color);
+    color: white;
+}
+
+/*! Form Add */
+.user-box:nth-child(4) {
+    width: 100% !important;
+    margin-left: 0 !important;
+}
+
+.select-categ {
+    width: 61%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--black-color);
+    margin: 0 3%;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 200px;
+    outline: none;
+    background: white;
+}
+
+.select-categ .option-categ:hover {
+    background: linear-gradient(right, var(--red-color) 0%, var(--green-color) 100%) !important;
+}
+
+.div-btn {
+    margin-left: -3vw;
+}
+
+.div-btn button {
+    margin-right: 21.5vw !important;
+    min-width: 7.9vw;
+    margin-top: 1vw;
+}
+
+.div-btn .btn-add:hover {
+    background: var(--red-color) !important;
+}
+
+.div-btn .btn-add:hover span{
+    background: var(--yellow-color) !important;
+}
+
+.link-btn-back {
+    margin-left: 6.2vw;
+}
+
+.btn-back {
+    margin-top: 1vw;
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: var(--black-color);
+    background: var(--yellow-color) !important;
+    font-size: 16px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-right: 13.9vw !important;
+    letter-spacing: 3px;
+    text-decoration: none;
+}
+
+.link-btn-back button span{
+    background: var(--red-color) !important;
+}
+

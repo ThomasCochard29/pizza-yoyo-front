@@ -1,62 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import axios from 'axios';
 
 // CSS
 import "../../App.css";
 
-// Components
-import { pizzaData } from '../Data/data'
-
 const PizzaCard = () => {
 
-    // State pour la selection de la base de la pizza
-    const [selectedBase, setSelectedBase] = useState("Tomate");
+    const [data, setData] = useState([]);
+    const [filteredPizzas, setFilteredPizzas] = useState([]); // Pizzas filtrées
+    const [basePizza, setBasePizza] = useState("Tomate");
 
     // State de le style du bouton si on click 
     const [couleurActive, setCouleurActive] = useState(null);
 
-    // Filtre pour l'affichage des pizzas
-    const filterPizza = () => {
-        if(selectedBase === "all") {
-            return pizza
-        } else {
-            return pizzaData[0].base[selectedBase]
-        }
-    }
+    useEffect(() => { 
+      axios.get('http://localhost:8800/api/pizzas/find')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err));
+    }, [])
+
+    useEffect(() => {
+        const pizzaBase = data.filter((data) => data);
+        setFilteredPizzas(pizzaBase);
+    }, [data]);      
 
     // Gestion du click pour set le style du bouton et set le choix de la base
     const handleOnClick = (base) => {
-        setSelectedBase(base);
+        setBasePizza(base)
+        const pizza = data.filter((data) => data.categorie_base === basePizza)
+        setFilteredPizzas(pizza);
         setCouleurActive(base);      
     }
 
     // Parcour du fichier de la data pour les pizzas et creation de la card pour l'affichage des pizzas
-    const pizza = filterPizza().map((pizza , i) => {
+    const pizzaCard = filteredPizzas.map((data, i) => {
         return(
             <Card sx={{ minWidth: 200, maxWidth: 340, minHeight: 440 }} key={i} className="card-template">
                 <CardActionArea>
                     <CardMedia
                         component="img"
                         height="240vh"
-                        image={Object.values(pizza.image)[0]}
-                        alt={pizza.imageDescription}
+                        src={`${process.env.REACT_APP_API_URL}${data.image}`}
+                        alt={data.image_descrip}
                     />
                     <CardContent className="card-content">
                         <Typography 
                             gutterBottom 
                             variant="h3"
                         >
-                            {pizza.nom}
+                            {data.nom}
                         </Typography>
                         <Typography style={{fontSize: '16px'}}>
-                            {pizza.description}
+                            {data.description}
                         </Typography>
                         <Typography style={{color: '#FFCD02', marginTop: '10px', fontSize: '20px', fontWeight: 'bold'}}>
-                            {pizza.prix}
+                            {data.prix}€
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -68,7 +71,7 @@ const PizzaCard = () => {
         <>
             <section className="filter">
                 <button 
-                    onClick={() => handleOnClick("Tomate")} 
+                    onClick={() => handleOnClick(("Tomate"))} 
                     style={
                         {   
                             backgroundColor: couleurActive === 'Tomate' ? '#C00A27' : 'white', 
@@ -76,19 +79,23 @@ const PizzaCard = () => {
                         }
                     } 
                     className="btn-filter btn-tomate"
+                    name="base"
+                    value={1}
                 >
                     BASE TOMATE
                 </button>
 
                 <button 
-                    onClick={() => handleOnClick("CremeFraiche")} 
+                    onClick={() => handleOnClick("Creme Fraiche")} 
                     style={
                         { 
-                            backgroundColor: couleurActive === 'CremeFraiche' ? '#FFCD02' : 'white', 
-                            color: couleurActive === 'CremeFraiche' ? 'white' : 'black' 
+                            backgroundColor: couleurActive === 'Creme Fraiche' ? '#FFCD02' : 'white', 
+                            color: couleurActive === 'Creme Fraiche' ? 'white' : 'black' 
                         }
                     }
                     className="btn-filter btn-cf"
+                    name="base"
+                    value={2}
                 >
                     BASE CREME FRAICHE
                 </button>
@@ -102,13 +109,15 @@ const PizzaCard = () => {
                         }
                     } 
                     className="btn-filter btn-choco"
+                    name="base"
+                    value={3}
                 >
                     BASE CHOCOLAT
                 </button>
             </section>
 
             <section className="section-card">
-               { pizza } 
+               { pizzaCard } 
             </section>
         </>
     )

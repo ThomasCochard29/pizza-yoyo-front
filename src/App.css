@@ -418,7 +418,7 @@ body {
 }
 
 /* Btn Form + Animation */
-.form-contact-gray form a {
+.form-contact-gray form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -432,35 +432,36 @@ body {
     transition: .5s;
     margin-right: 22vw;
     letter-spacing: 3px;
+    border: none;
 }
 
-.form-contact-gray a:hover {
+.form-contact-gray button:hover {
     background: var(--red-color);
     color: white;
 }
 
-.form-contact-gray a:hover span:nth-child(1){
+.form-contact-gray button:hover span:nth-child(1){
     background: linear-gradient(90deg, transparent, var(--green-color));
 }
 
-.form-contact-gray a:hover span:nth-child(2){
+.form-contact-gray button:hover span:nth-child(2){
     background: linear-gradient(180deg, transparent, var(--green-color));
 }
 
-.form-contact-gray a:hover span:nth-child(3){
+.form-contact-gray button:hover span:nth-child(3){
     background: linear-gradient(270deg, transparent, var(--green-color));
 }
 
-.form-contact-gray a:hover span:nth-child(4){
+.form-contact-gray button:hover span:nth-child(4){
     background: linear-gradient(360deg, transparent, var(--green-color));
 }
 
-.form-contact-gray a span {
+.form-contact-gray button span {
     position: absolute;
     display: block;
 }
 
-.form-contact-gray a span:nth-child(1) {
+.form-contact-gray button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -480,7 +481,7 @@ body {
     }
 }
 
-.form-contact-gray a span:nth-child(2) {
+.form-contact-gray button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -501,7 +502,7 @@ body {
     }
 }
 
-.form-contact-gray a span:nth-child(3) {
+.form-contact-gray button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -522,7 +523,7 @@ body {
     }
 }
 
-.form-contact-gray a span:nth-child(4) {
+.form-contact-gray button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -604,9 +605,8 @@ body {
 .header-lacarte {
     background: var(--red-color);
     height: 20vh;
-    border-top: 7px solid;
+    border-top: 1px solid;
     border-image: linear-gradient(to right, transparent 0%, white 50%, transparent 100%) 1;
-    margin-top: 7%;
 }
 
 .search-lacarte {
@@ -643,6 +643,16 @@ body {
     top: -10px;
     width: 100%;
     height: 4vh;
+}
+
+/*! Toastify Notif */
+.Toastify__toast-theme--light {
+    background-image: url("./images/pngtree-black-background-simple-texture-image_556938.jpg") !important;
+    color: white !important;
+}
+
+.Toastify__progress-bar {
+    background: var(--red-color) !important;
 }
 
 @media (max-width: 425px) {
