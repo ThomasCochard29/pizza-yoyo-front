@@ -1,6 +1,8 @@
 import React, { useState, useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // CSS
 import "../../App.css";
@@ -27,7 +29,17 @@ const Login = () => {
 
         try {
             await login(inputs);
-        navigate("/")
+            navigate("/")
+            toast.success("Utilisateur Connecté(e) !", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                bodyClassName: "toastify-content",
+            });
         } catch(err) {
             setErr(err.response.data);
         }
@@ -44,25 +56,29 @@ const Login = () => {
                     <div className="user-box">
                         <input type="password" name="password" placeholder="Password" onChange={handleChange}/>
                     </div>
-                    { err && err}
-                    <a href="#" onClick={handleLogin}>
+                    <div style={{textAlign: "start", marginLeft: "10vw"}}>
+                        { err && err}
+                    </div>
+                    <br />
+                    <button href="#" onClick={handleLogin} className="btn-connexion-login">
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-                        Connection
-                    </a>
+                        Connexion
+                    </button>
                     <p style={{fontSize: "16px", textAlign: "start", marginLeft: "9.9vw", marginTop: "1vh"}}>Vous N'Avez Pas De Compte ?</p>
                     <Link to="/register" className="btn-logintoregister">
-                        <btn href="#">
+                        <button href="#">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
                             Inscription
-                        </btn>
+                        </button>
                     </Link>
                 </form>
+                <ToastContainer />
             </div>
         </div>
     )

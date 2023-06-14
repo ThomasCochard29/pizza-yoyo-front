@@ -8,21 +8,20 @@
 }
 
 .login-contact {
-    margin-top: 10%;
+    margin-top: 2%;
 }
 
-.form-contact-gray form a {
-    margin-left: 2vw;
+.form-contact-gray form button {
+    margin-left: 3vw;
 }
 
-.btn-logintoregister {
-    margin-left: 2vw;
+.btn-connexion-login {
+    background-color: var(--red-color) !important;
     color: white !important;
-    background: var(--red-color) !important;
 }
 
-.btn-logintoregister:hover {
-    background: var(--yellow-color) !important;
+.form-contact-gray form .btn-connexion-login:hover {
+    background-color: var(--yellow-color) !important;
     color: var(--black-color) !important;
 }
 

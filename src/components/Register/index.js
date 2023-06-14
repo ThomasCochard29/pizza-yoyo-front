@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // CSS
 import "../../App.css";
@@ -31,6 +33,16 @@ const Register = () => {
         try {
             await axios.post("http://localhost:8800/api/auth/register", inputs);
             navigate("/login")
+            toast.success("Utilisateur Inscris !", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                bodyClassName: "toastify-content",
+            });
         } catch (err) {
             setErr(err.response?.data);
         }
@@ -68,13 +80,13 @@ const Register = () => {
                         />
                     </div>
                     {err && err}
-                    <a href="#" onClick={handleClick}>
+                    <button href="#" onClick={handleClick}>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         Inscription
-                    </a>
+                    </button>
                     <p
                         style={{
                             fontSize: "16px",
@@ -86,15 +98,16 @@ const Register = () => {
                         Vous Avez Deja Un Compte ?
                     </p>
                     <Link to="/login" className="btn-logintoregister">
-                        <btn href="#">
+                        <button href="#">
                             <span></span>
                             <span></span>
                             <span></span>
                             <span></span>
                             Connection
-                        </btn>
+                        </button>
                     </Link>
                 </form>
+                <ToastContainer />
             </div>
         </div>
     )

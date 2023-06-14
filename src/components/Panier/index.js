@@ -45,7 +45,8 @@ function Panier() {
                 <div class="col-md-4">
                     <div class="payment-info">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span>Card details</span><img class="rounded" src="https://i.imgur.com/WU501C8.jpg" width="30"/></div>
+                            <span>Card details</span>
+                        </div>
                         <span class="type d-block mt-3 mb-1">Card type</span>
                         <label class="radio">
                             <input type="radio" name="card" value="payment"/>
@@ -80,9 +81,11 @@ function Panier() {
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24"/></div>
+                                <label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24"/>
+                            </div>
                             <div class="col-md-6">
-                                <label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342"/></div>
+                                <label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342"/>
+                            </div>
                         </div>
                         <hr class="line"/>
                         <div class="d-flex justify-content-between information">

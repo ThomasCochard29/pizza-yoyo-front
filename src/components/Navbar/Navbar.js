@@ -1,13 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext.js";
-import axios from "axios";
 
 // CSS
 import "./Navbar.css";
-
-// Components
-import Hamster from "../WheelHamster";
 
 // Img
 import Logo from '../../images/logo/Logo.png';
@@ -29,7 +25,7 @@ function Navbar() {
     { 
       id: 1, 
       nom: <a
-              className="nav-item-a"
+              className={ location.pathname === '/' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/' ? '#00A149' : '#C00A27'
               }}
@@ -41,7 +37,7 @@ function Navbar() {
     { 
       id: 2, 
       nom: <a
-              className="nav-item-a"
+              className={ location.pathname === '/lacarte' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/lacarte' ? '#00A149' : '#C00A27'
               }}
@@ -53,7 +49,7 @@ function Navbar() {
     { 
       id: 3, 
       nom: <a
-              className="nav-item-a"
+              className={ location.pathname === '/contact' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/contact' ? '#00A149' : '#C00A27'
               }}
@@ -64,33 +60,33 @@ function Navbar() {
     },
     { 
       id: 4, 
-      nom:  <div className="nav-item-div" style={{display: 'flex', alignItems: 'center'}}>
-              <BsFillTelephoneFill className="nav-item-div"/>
-              <p className="nav-item-div" style={{margin: '0px 0px 0px 10px'}}>06 01 02 03 04</p>
+      nom:  <div 
+              className="nav-item-div" 
+              style={{display: 'flex', alignItems: 'center'}}
+            >
+              <BsFillTelephoneFill className="nav-item-a custom-icon"/>
+              <p className="nav-item-a" style={{margin: '0px 0px 0px 10px'}}>06 01 02 03 04</p>
             </div>
     }
   ];
   
   // On parcour le tableau lienMenu pour les affichers
   const mesLiens = lienMenu.map((lien , i) => (
-    <a key={i} className="nav-link" href={lien.lien}>
+    <Link key={i} className="nav-link" to={lien.lien}>
       {lien.nom}
-    </a>
+    </Link>
   ));
 
   // state changement de background pour le scroll
   const [navbar, setNavbar] = useState(false);
-  const [hamster, setHamster] = useState(false);
 
   //Fonction changement de background scroll de la navbar
   const changeBackground = () => {
     //console.log(window.scrollY)
     if (window.scrollY >= 300) {
       setNavbar(true);
-      setHamster(true)
     } else {
       setNavbar(false);
-      setHamster(false);
     }
   };
 
@@ -100,40 +96,20 @@ function Navbar() {
     window.addEventListener("scroll", changeBackground);
   });
 
-  const { currentUser } = useContext(AuthContext);
-
-  const [err, setErr] = useState(null);
-  const navigate = useNavigate();
-
-  const handleLogout = async e => {
-    e.preventDefault()
-
-    try{
-      await axios.post("http://localhost:8800/api/auth/logout");
-      navigate("/")
-      window.location.reload(false);
-    } catch (err) {
-      setErr(err.response.data);
-    }
-  }
+  const { currentUser, handleLogout } = useContext(AuthContext);
 
   return(
     <nav className={
       navbar
-      ? "navbar fixed-top"
-      : "navbarChange fixed-top"
+      ? "navbarChange fixed-top"
+      : "navbarChange"
     }>
       <div>
         <img 
           src={Logo} 
           alt="Logo Pizza YoYo"
-          className={
-            hamster
-            ? "logo-out"
-            : "logo"
-          }
+          className="logo"
         />
-        <Hamster/>
       </div>
 
       <input type="checkbox" id="click" />
@@ -145,31 +121,32 @@ function Navbar() {
         <li className="nav-item d-flex">{mesLiens}</li>
       </ul>
 
-      {currentUser && (
+      <Link to="/panier">
         <AiFillShopping
           size="40px"
           color="white"
           className="nav-item-div"
           style={{marginTop: "-1vw"}}
         />
-      )}
+      </Link>
 
       {currentUser && currentUser.admin && (
-        <TbCircleKeyFilled 
-          size="40px" 
-          style={{marginRight: "20px"}} 
-          color="white"
-          className="search-icon"
-        />
+        <Link to={currentUser ? "/admin" : "/login"}>
+          <TbCircleKeyFilled 
+            size="40px" 
+            style={{marginRight: "20px"}} 
+            color="white"
+            className="search-icon"
+          />
+        </Link>
       )}
 
-      <Link to="/login">
+      <Link to={!currentUser ? "/login" : "/"} className="search-icon">
         <SiCodechef 
           size="40px"
           style={{marginRight: "20px"}} 
           color="white" 
-          className="search-icon" 
-          title={!currentUser ? "Connection" : "Déconnection"}
+          title={!currentUser ? "Connexion" : "Déconnexion"}
           onClick={!currentUser ? null : handleLogout}
         />
       </Link>

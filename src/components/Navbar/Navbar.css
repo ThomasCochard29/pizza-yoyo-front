@@ -19,11 +19,19 @@
 }
 
 .nav-item:hover {
-  color: var(--green-color);
+  color: var(--green-color) !important;
 }
 
-.nav-item-div:hover {
-  color: var(--green-color);
+.nav-item-b:hover {
+  color: var(--yellow-color) !important;
+}
+
+.nav-item-div:hover, .nav-item-a:hover {
+  color: var(--green-color) !important;
+}
+
+.nav-item-div:focus {
+  color: var(--green-color) !important;
 }
 
 nav {
