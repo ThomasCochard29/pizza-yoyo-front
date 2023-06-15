@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // CSS
 import "../admin.css"
-
 
 function PizzaGrid() {
 
@@ -20,22 +20,22 @@ function PizzaGrid() {
   const styleBtn = {color: "#FFCD02", background: "#C00A27"};
 
   const btnUpdate = (params) => {
-    // const onClick = (e) => {
-    //   e.stopPropagation(); // don't select this row after clicking
+    const onClick = (e) => {
+      e.stopPropagation(); // don't select this row after clicking
 
-    //   const api = params.api;
-    //   const thisRow = {};
+      const api = params.api;
+      const thisRow = {};
 
-    //   api
-    //     .getAllColumns()
-    //     .filter((c) => c.field !== "__check__" && !!c)
-    //     .forEach(
-    //       (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-    //     );
+      api
+        .getAllColumns()
+        .filter((p) => p.field !== "__check__" && !!p)
+        .forEach(
+          (p) => (thisRow[p.field] = params.getValue(params.id, p.field))
+        );
 
-    //   return alert(JSON.stringify(thisRow, null, 4));
-    // };
-    return <Button style={styleBtn}>Update</Button>;
+      return alert(JSON.stringify(thisRow, null, 4));
+    };
+    return <Link to={`/admin/updatepizza/${params.id}`}><Button style={styleBtn}>Update</Button></Link>;
   };
 
   const btnDelete = () => {
@@ -43,7 +43,7 @@ function PizzaGrid() {
   };
   
   const columns = [ 
-      { field: "id", headerName: 'id', width: 150, headerClassName: "header-datagrid" },
+      { field: "id_pizza", headerName: 'id', width: 150, headerClassName: "header-datagrid" },
       { field: 'nom', headerName: 'nom', width: 150, headerClassName: "header-datagrid" },
       { field: 'description', headerName: 'description', width: 150, headerClassName: "header-datagrid" },
       { field: 'prix', headerName: 'prix', width: 150, headerClassName: "header-datagrid" },

@@ -5,11 +5,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import axios from 'axios';
+import { useLocation } from "react-router";
 
 // CSS
 import "../../App.css";
 
 const PizzaCard = () => {
+    const location = useLocation();
 
     const [data, setData] = useState([]);
     const [filteredPizzas, setFilteredPizzas] = useState([]); // Pizzas filtrées
@@ -40,7 +42,7 @@ const PizzaCard = () => {
     // Parcour du fichier de la data pour les pizzas et creation de la card pour l'affichage des pizzas
     const pizzaCard = filteredPizzas.map((data, i) => {
         return(
-            <Card sx={{ minWidth: 200, maxWidth: 340, minHeight: 440 }} key={i} className="card-template">
+            <Card sx={{minWidth: 200, maxWidth: 340, minHeight: 440}} key={i} className="card-template" style={location.pathname === '/lacarte' ? {margin : "2% 7.6%"} : {margin : "2% 11%"}}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
@@ -116,7 +118,7 @@ const PizzaCard = () => {
                 </button>
             </section>
 
-            <section className="section-card">
+            <section className={location.pathname === '/lacarte' ? "section-card-article" : "section-card"}>
                { pizzaCard } 
             </section>
         </>

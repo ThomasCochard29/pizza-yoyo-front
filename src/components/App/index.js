@@ -20,6 +20,8 @@ import CategorieGrid from "../Admin/CategorieGrid";
 import PizzaGrid from "../Admin/PizzaGrid";
 import AddPizza from "../Admin/PizzaGrid/add";
 import AddCategorie from "../Admin/CategorieGrid/add";
+import UpdatePizza from "../Admin/PizzaGrid/update";
+import UpdateCategorie from "../Admin/CategorieGrid/update";
 
 function App() {
 
@@ -41,8 +43,10 @@ function App() {
           <Route exact path="/admin/usergrid" element={< UserGrid />}/>
           <Route exact path="/admin/categoriegrid" element={< CategorieGrid />}/>
           <Route exact path="/admin/addcategorie" element={< AddCategorie />}/>
+          <Route exact path="/admin/updatecategorie/:id" element={< UpdateCategorie />}/>
           <Route exact path="/admin/pizzagrid" element={< PizzaGrid />}/>
           <Route exact path="/admin/addpizza" element={< AddPizza />}/>
+          <Route exact path="/admin/updatepizza/:id" element={< UpdatePizza />}/>
         </Routes>        
 
       < Footer/>

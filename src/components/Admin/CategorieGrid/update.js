@@ -1,5 +1,5 @@
-import React, { useState, useContext} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect} from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,9 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import "../../../App.css";
 import "../admin.css"
 
-const AddCategorie = () => {
+const UpdateCategorie = () => {
 
-    const handleClear = () => {
+    const { id } = useParams();
+
+    const handleClear = (e) => {
+        e.preventDefault()
+
         const inputs = document.querySelectorAll("input");
 
         // Effacer le contenu de chaque input
@@ -21,14 +25,25 @@ const AddCategorie = () => {
 
     const [inputs, setInputs] = useState(
         {
-            base: ""
+            base: "",
+            id: ""
         }
     );
     const [err, setErr] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => { 
+        axios.get(`http://localhost:8800/api/categories/findid/${id}`)
+        .then(res => setInputs(prevInputs => ({ ...prevInputs, base: res.data[0].base, id: res.data[0].id })))
+        .catch(err => console.log(err));
+    }, [])
 
     const handleChange = (e) => {
         setInputs(prev => ({...prev, [e.target.name]: e.target.value}))
     };
+
+
+    // console.log(inputs);
 
     const handleClick = async e => {
         e.preventDefault()
@@ -36,20 +51,24 @@ const AddCategorie = () => {
         console.log(inputs);
     
         try {
-            await axios.post("http://localhost:8800/api/categories/add", inputs);
-            toast.success("Categorie Ajouté !", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: false,
-                progress: undefined,
-                bodyClassName: "toastify-content",
-            });
+            await axios.put(`http://localhost:8800/api/categories/update/` + id , inputs)
+            .then(res =>
+                toast.success("Categorie Update !", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    bodyClassName: "toastify-content",
+                }),
+                navigate('/admin/categoriegrid')
+            )
+            .catch(err => console.log(err))
         } catch (err) {
             setErr(err.response?.data);
-            toast.error("Erreur Categorie Non Ajouté !", {
+            toast.error("Erreur Categorie Non Update !", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -65,10 +84,10 @@ const AddCategorie = () => {
     return (
         <div className="form-contact">
             <div className="form-contact-gray">
-                <p>Ajout Categorie</p>
+                <p>Update Categorie id: {inputs.id}</p>
                 <form>
                     <div className="user-box">
-                        <input type="text" name="base" id="" placeholder="Base" onChange={handleChange}/>
+                        <input type="text" name="base" id="" placeholder={inputs.base} onChange={handleChange}/>
                     </div>
                     <div className="div-btn">
                         <button href="#" onClick={handleClick} className="btn-add">
@@ -76,7 +95,7 @@ const AddCategorie = () => {
                             <span></span>
                             <span></span>
                             <span></span>
-                            Ajouter
+                            Update
                         </button>
 
                         <button href="#" onClick={handleClear}>
@@ -104,4 +123,4 @@ const AddCategorie = () => {
     )
 }
 
-export default AddCategorie;
+export default UpdateCategorie;
