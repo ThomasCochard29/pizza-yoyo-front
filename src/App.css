@@ -314,10 +314,16 @@ body {
     margin-left: 16%;
 }
 
+.section-card-article {
+    border: none;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
 .card-template {
     width: 446px;
     height: 420px !important;
-    margin: 2% 11%;
     box-sizing: border-box;
     background-color: var(--green-color) !important;
     border: 2px white solid;
