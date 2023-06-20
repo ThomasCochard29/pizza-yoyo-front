@@ -7,6 +7,97 @@
     --yellow-color: #FFCD02;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*! ----------------- MENU ADMIN ----------------- */
+.container {
+    display: flex;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: -4%;
+    min-width: 100%;
+    background: url("../../images/Plandetravail1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-admin {
+    width: 100px;
+    min-height: 98vh;
+    max-height: 120vh;
+    background: linear-gradient(to right, var(--red-color) 0%, transparent 50%, var(--green-color) 100%);
+   
+    border-radius: 100px;
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+.div-logo-admin {
+    display: flex;
+    justify-content: center; /* Aligner horizontalement au centre */
+    align-items: center; /* Aligner verticalement au centre */
+}
+
+.logo-admin {
+    justify-content: center;
+    width: 5vw;
+    min-width: 2vw;
+    max-width: 10vw;
+    margin: 10vh 0;
+}
+
+.ul-admin {
+    display: flex;
+    justify-content: center;/* Aligner horizontalement au centre */
+    align-items: center;/* Aligner verticalement au centre */
+    margin-top: 10vh;
+}
+
+.nav-admin .li-admin {
+    display: flex;
+    flex-direction: column;
+}
+
+.a-admin {
+    margin-right: 92px;
+}
+
+.a-admin[title]:hover:after {
+    opacity: 1;
+    transition: all 0.2s ease 0.6s;
+    visibility: visible;
+}
+
+.a-admin[title]:after {
+    content: attr(title);
+    position: absolute;
+    left: 6.4%;
+    margin-top: -5vh;
+    padding: 4px 8px 4px 8px;
+    color: var(--yellow-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-radius: 5px;  
+    box-shadow: 0px 0px 15px #222;                         
+    visibility: hidden;
+    background: transparent;
+}
+
+/*! ----------------- CONTENT ADMIN ----------------- */
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Aligner horizontalement au centre */
+    align-items: center; /* Aligner verticalement au centre */
+    margin-left: 10vw;
+    width: 100%;
+}
+
+
 /*! DataGrid */
 .header-datagrid {
     background: var(--green-color);
@@ -50,7 +141,7 @@
     background: var(--red-color) !important;
 }
 
-.div-btn .btn-add:hover span{
+.div-btn .btn-add:hover span {
     background: var(--yellow-color) !important;
 }
 
@@ -75,7 +166,6 @@
     text-decoration: none;
 }
 
-.link-btn-back button span{
+.link-btn-back button span {
     background: var(--red-color) !important;
 }
-

@@ -46,8 +46,17 @@ const AddPizza = () => {
         const inputFields = document.querySelectorAll("input");
 
         // Effacer le contenu de chaque input
-        inputFields.forEach((input) => {
-            input.value = "";
+        inputFields.forEach(() => {
+            setInputs(
+                {
+                    nom: "",
+                    description: "",
+                    prix: "",
+                    image: "",
+                    image_descrip: "",
+                    categorie_id: "",
+                }
+            );
         });
         
         toast.success("Formulaire Clear", {

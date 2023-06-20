@@ -34,7 +34,7 @@
   color: var(--green-color) !important;
 }
 
-nav {
+.nav {
   display: flex;
   height: 14vh;
   background: var(--red-color);

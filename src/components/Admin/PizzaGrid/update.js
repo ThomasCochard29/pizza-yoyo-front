@@ -9,21 +9,22 @@ import FormData from "form-data";
 import "../../../App.css";
 import "../admin.css";
 
-const UpdatePizza = ({ match }) => {
+const UpdatePizza = () => {
 
+  const { id } = useParams();
   const [categories, setCategories] = useState([]);
   const [inputs, setInputs] = useState({
     nom: "",
     description: "",
     prix: "",
-    image: "",
+    image: null,
     image_descrip: "",
     categorie_id: "",
   });
   const [err, setErr] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-
-  const { id } = useParams();
+  const [originalFile, setOriginalFile] = useState(null);
+  const [currentImageName, setCurrentImageName] = useState("");
 
   useEffect(() => {
     fetchCategories();
@@ -44,21 +45,25 @@ const UpdatePizza = ({ match }) => {
   const fetchPizza = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/pizzas/find/` + id
+        `http://localhost:8800/api/pizzas/findid/${id}`
       );
-      const pizza = response.data;
+      const pizza = response.data[0];
+      // console.log(response.data);
       setInputs({
         nom: pizza.nom,
         description: pizza.description,
         prix: pizza.prix,
-        image: pizza.image,
         image_descrip: pizza.image_descrip,
         categorie_id: pizza.categorie_id,
       });
+      setOriginalFile(pizza.image)
+      setCurrentImageName(pizza.image.split("/uploads/").pop());
     } catch (error) {
       console.error("Error fetching pizza:", error);
     }
   };
+
+  // console.log(originalFile);
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -92,15 +97,24 @@ const UpdatePizza = ({ match }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    } else {
+      formData.append("image", originalFile);
+    }
 
     for (const [key, value] of Object.entries(inputs)) {
       formData.append(key, value);
     }
 
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
     try {
       await axios.put(
-        `http://localhost:8800/api/pizzas/update/${match.params.id}`,
+        `http://localhost:8800/api/pizzas/update/${id}`,
         formData
       );
       toast.success("Pizza mise à jour !", {
@@ -131,7 +145,7 @@ const UpdatePizza = ({ match }) => {
   return (
     <div className="form-contact">
       <div className="form-contact-gray">
-        <p>Mise à jour Pizza</p>
+        <p>Update Pizza id: {id}</p>
         <form onSubmit={handleSubmit}>
           <div className="user-box">
             <input
@@ -163,7 +177,7 @@ const UpdatePizza = ({ match }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="user-box">
+          <div className="input-file user-box">
             <input
               type="file"
               name="image"
@@ -171,6 +185,7 @@ const UpdatePizza = ({ match }) => {
               placeholder="Image"
               onChange={handleFileChange}
             />
+            <img src={selectedFile ? URL.createObjectURL(selectedFile) : `${process.env.REACT_APP_API_URL}${originalFile}`} alt={inputs.image_descrip} width={80}/>
           </div>
           <div className="user-box">
             <input

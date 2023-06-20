@@ -46,8 +46,8 @@ function CategorieGrid() {
   ];
 
   return (
-    <>
-      <Link to="/admin/addcategorie" className="btn-back" style={{marginLeft: "31.6vw"}}>
+    <section>
+      <Link to="/admin/addcategorie" className="btn-back">
         <span></span>
         <span></span>
         <span></span>
@@ -55,7 +55,7 @@ function CategorieGrid() {
         Ajouter Une Categorie
       </Link>
 
-      <div style={{ height: 300, width: '100%', display: "flex", marginTop: "2vw" }}>
+      <div style={{ height: "100%", width: '100%', display: "flex", marginTop: "2vw", background: "white" }}>
         <DataGrid 
           style={{alignItems: "center", borderTop: "none", borderBottom: "none"}} 
           rows={data} 
@@ -63,14 +63,11 @@ function CategorieGrid() {
           loading={data.length === 0}
           disableRowSelectionOnClick
           disableCellSelectionOnClick
-          initialState={{
-            ...data.initialState,
-            pagination: { paginationModel: { pageSize: 5 } },
-          }}
+          getRowId={(row) => row.id} // Assign unique key to each row
           pageSizeOptions={[5, 10, 25]}
         />
       </div>
-    </>
+    </section>
   )
 }
 
