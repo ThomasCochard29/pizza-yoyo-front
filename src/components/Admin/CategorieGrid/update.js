@@ -63,7 +63,7 @@ const UpdateCategorie = () => {
                     progress: undefined,
                     bodyClassName: "toastify-content",
                 }),
-                navigate('/admin/categoriegrid')
+                // navigate('/admin/categoriegrid')
             )
             .catch(err => console.log(err))
         } catch (err) {

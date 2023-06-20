@@ -42,7 +42,7 @@ const PizzaCard = () => {
     // Parcour du fichier de la data pour les pizzas et creation de la card pour l'affichage des pizzas
     const pizzaCard = filteredPizzas.map((data, i) => {
         return(
-            <Card sx={{minWidth: 200, maxWidth: 340, minHeight: 440}} key={i} className="card-template" style={location.pathname === '/lacarte' ? {margin : "2% 7.6%"} : {margin : "2% 11%"}}>
+            <Card sx={{minWidth: 200, maxWidth: 340, minHeight: 500, maxHeight: 600}} key={i} className="card-template" style={location.pathname === '/lacarte' ? {margin : "2% 7.6%"} : {margin : "2% 11%"}}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
@@ -53,12 +53,12 @@ const PizzaCard = () => {
                     <CardContent className="card-content">
                         <Typography 
                             gutterBottom 
-                            variant="h3"
+                            variant="h4"
                         >
                             {data.nom}
                         </Typography>
                         <Typography style={{fontSize: '16px'}}>
-                            {data.description}
+                            {data.description.slice(0, 140)}...
                         </Typography>
                         <Typography style={{color: '#FFCD02', marginTop: '10px', fontSize: '20px', fontWeight: 'bold'}}>
                             {data.prix}€

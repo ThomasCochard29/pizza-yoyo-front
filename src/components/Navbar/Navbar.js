@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/authContext.js";
 
 // CSS
@@ -11,7 +11,7 @@ import Logo from '../../images/logo/Logo.png';
 // Icone
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { HiSearchCircle } from 'react-icons/hi';
-import { SiCodechef } from 'react-icons/si';
+import { SiCodechef } from 'react-icons/si'
 import { TbCircleKeyFilled } from 'react-icons/tb';
 import { AiFillShopping } from 'react-icons/ai';
 
@@ -24,7 +24,8 @@ function Navbar() {
   const lienMenu = [
     { 
       id: 1, 
-      nom: <a
+      nom:  <a
+              href
               className={ location.pathname === '/' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/' ? '#00A149' : '#C00A27'
@@ -36,7 +37,8 @@ function Navbar() {
     },
     { 
       id: 2, 
-      nom: <a
+      nom:  <a
+              href
               className={ location.pathname === '/lacarte' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/lacarte' ? '#00A149' : '#C00A27'
@@ -48,7 +50,8 @@ function Navbar() {
     },
     { 
       id: 3, 
-      nom: <a
+      nom:  <a
+              href
               className={ location.pathname === '/contact' ? 'nav-item-b' : 'nav-item-a' }
               style={{   
                 backgroundColor: location.pathname === '/contact' ? '#00A149' : '#C00A27'
@@ -69,7 +72,7 @@ function Navbar() {
             </div>
     }
   ];
-  
+
   // On parcour le tableau lienMenu pour les affichers
   const mesLiens = lienMenu.map((lien , i) => (
     <Link key={i} className="nav-link" to={lien.lien}>
@@ -99,64 +102,70 @@ function Navbar() {
   const { currentUser, handleLogout } = useContext(AuthContext);
 
   return(
-    <nav className={
-      navbar
-      ? "navbarChange fixed-top"
-      : "navbarChange"
-    }>
-      <div>
-        <img 
-          src={Logo} 
-          alt="Logo Pizza YoYo"
-          className="logo"
-        />
-      </div>
+    <>
+      <nav className={
+          navbar
+          ? "navbarChange fixed-top nav"
+          : "navbarChange nav"
+        }
+        style={
+          location.pathname === "/admin" ? {display: "none"} : {}
+        }
+      >
+        <div>
+          <img 
+            src={Logo} 
+            alt="Logo Pizza YoYo"
+            className="logo"
+          />
+        </div>
 
-      <input type="checkbox" id="click" />
-      <label for="click" class="menu-btn">
-        <i class="fas fa-bars"></i>
-      </label>
+        <input type="checkbox" id="click" />
+        <label for="click" class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
 
-      <ul>
-        <li className="nav-item d-flex">{mesLiens}</li>
-      </ul>
+        <ul>
+          <li className="nav-item d-flex">{mesLiens}</li>
+        </ul>
 
-      <Link to="/panier">
-        <AiFillShopping
-          size="40px"
-          color="white"
-          className="nav-item-div"
-          style={{marginTop: "-1vw"}}
-        />
-      </Link>
-
-      {currentUser && currentUser.admin && (
-        <Link to={currentUser ? "/admin" : "/login"}>
-          <TbCircleKeyFilled 
-            size="40px" 
-            style={{marginRight: "20px"}} 
+        <Link to="/panier">
+          <AiFillShopping
+            size="40px"
             color="white"
-            className="search-icon"
+            className="nav-item-div"
+            style={{marginTop: "-1vw"}}
           />
         </Link>
-      )}
 
-      <Link to={!currentUser ? "/login" : "/"} className="search-icon">
-        <SiCodechef 
-          size="40px"
-          style={{marginRight: "20px"}} 
+        {currentUser && currentUser.admin && (
+          <Link to={currentUser ? "/admin" : "/login"}>
+            <TbCircleKeyFilled 
+              size="40px" 
+              style={{marginRight: "20px"}} 
+              color="white"
+              className="search-icon"
+            />
+          </Link>
+        )}
+
+        <Link to={!currentUser ? "/login" : "/"} className="search-icon">
+          <SiCodechef 
+            size="40px"
+            style={{marginRight: "20px"}} 
+            color="white" 
+            title={!currentUser ? "Connexion" : "Déconnexion"}
+            onClick={!currentUser ? null : handleLogout}
+          />
+        </Link>
+
+        <HiSearchCircle 
+          size="40px" 
           color="white" 
-          title={!currentUser ? "Connexion" : "Déconnexion"}
-          onClick={!currentUser ? null : handleLogout}
+          className="search-icon"
         />
-      </Link>
-
-      <HiSearchCircle 
-        size="40px" 
-        color="white" 
-        className="search-icon"
-      />
-    </nav>
+      </nav>
+    </>
   ) 
 }
 
